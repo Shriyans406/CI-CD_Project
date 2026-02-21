@@ -8,7 +8,7 @@ echo "==============================="
 mkdir -p logs
 
 # Build Docker image
-sudo docker build -t ci-cd-app -f docker/Dockerfile . > logs/build.log 2>&1
+docker build -t ci-cd-app -f docker/Dockerfile . > logs/build.log 2>&1
 
 if [ $? -eq 0 ]; then
     echo "Build Successful!"
