@@ -1,0 +1,49 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 360B 0.0s done
+#1 DONE 0.2s
+
+#2 [internal] load metadata for docker.io/library/debian:12
+#2 DONE 2.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B 0.0s done
+#3 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 55B 0.0s done
+#4 DONE 0.1s
+
+#5 [1/6] FROM docker.io/library/debian:12@sha256:34e7f0ae7c10a61bfbef6e1b2ed205d9b47bb12e90c50696f729a5c7a01cf1f2
+#5 resolve docker.io/library/debian:12@sha256:34e7f0ae7c10a61bfbef6e1b2ed205d9b47bb12e90c50696f729a5c7a01cf1f2
+#5 resolve docker.io/library/debian:12@sha256:34e7f0ae7c10a61bfbef6e1b2ed205d9b47bb12e90c50696f729a5c7a01cf1f2 0.3s done
+#5 DONE 0.3s
+
+#6 [4/6] RUN python3 -m venv /venv
+#6 CACHED
+
+#7 [5/6] RUN /venv/bin/pip install flask
+#7 CACHED
+
+#8 [2/6] WORKDIR /app
+#8 CACHED
+
+#9 [3/6] RUN apt update && apt install -y python3 python3-pip python3-venv
+#9 CACHED
+
+#10 [6/6] COPY ../app /app
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers 0.0s done
+#11 exporting manifest sha256:84e4411679a68cd1d9addc7d91ad640c979e5d5cfe5153b3f1a68e87bfcf6554 0.0s done
+#11 exporting config sha256:0840039a6c015569b40c034ab163b224583c1872f43521d07f38978eb32c8176 0.0s done
+#11 exporting attestation manifest sha256:ee73c9666ff9233f6aa5510d5f97e58f4f3781b452ef32194a74855cbefd462a
+#11 exporting attestation manifest sha256:ee73c9666ff9233f6aa5510d5f97e58f4f3781b452ef32194a74855cbefd462a 0.2s done
+#11 exporting manifest list sha256:7d39108012638b4cb072a4fdb624e1b99f12ceeed3d6f2d44085d5ed9bc07dc8
+#11 exporting manifest list sha256:7d39108012638b4cb072a4fdb624e1b99f12ceeed3d6f2d44085d5ed9bc07dc8 0.1s done
+#11 naming to docker.io/library/ci-cd-app:latest 0.0s done
+#11 unpacking to docker.io/library/ci-cd-app:latest 0.1s done
+#11 DONE 0.7s

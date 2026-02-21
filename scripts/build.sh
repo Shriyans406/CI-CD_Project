@@ -1,17 +1,20 @@
 #!/bin/bash
 
-echo "Starting build process..."
+echo "==============================="
+echo "Starting Docker Build Process"
+echo "==============================="
 
-echo "Navigating to project root directory..."
-cd ..
+# Create logs directory if not exists
+mkdir -p logs
 
-echo "Activating virtual environment..."
-source venv/bin/activate
+# Build Docker image
+sudo docker build -t ci-cd-app -f docker/Dockerfile . > logs/build.log 2>&1
 
-echo "Checking Python version..."
-python --version
-
-echo "Checking Flask installation..."
-pip show flask
-
-echo "Build process completed successfully."
+if [ $? -eq 0 ]; then
+    echo "Build Successful!"
+    echo "Image ci-cd-app created."
+else
+    echo "Build Failed!"
+    echo "Check logs/build.log"
+    exit 1
+fi
