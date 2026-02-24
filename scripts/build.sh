@@ -1,20 +1,25 @@
 #!/bin/bash
+set -euo pipefail
 
-echo "==============================="
-echo "Starting Docker Build Process"
-echo "==============================="
+LOG_FILE="logs/build.log"
+IMAGE_NAME="ci-cd-app"
+VERSION=$(date +%Y%m%d%H%M%S)
 
-# Create logs directory if not exists
+echo "===============================" | tee -a "$LOG_FILE"
+echo "     DOCKER BUILD STAGE        " | tee -a "$LOG_FILE"
+echo "===============================" | tee -a "$LOG_FILE"
+
+# Create logs directory
 mkdir -p logs
 
-# Build Docker image
-docker build -t ci-cd-app -f docker/Dockerfile . > logs/build.log 2>&1
+echo "Building Docker image..." | tee -a "$LOG_FILE"
 
-if [ $? -eq 0 ]; then
-    echo "Build Successful!"
-    echo "Image ci-cd-app created."
-else
-    echo "Build Failed!"
-    echo "Check logs/build.log"
-    exit 1
-fi
+docker build -t $IMAGE_NAME:$VERSION -t $IMAGE_NAME:latest -f docker/Dockerfile . \
+  2>&1 | tee -a "$LOG_FILE"
+
+echo "$VERSION" > .version
+
+echo "Build Successful! 🚀" | tee -a "$LOG_FILE"
+echo "Created images:" | tee -a "$LOG_FILE"
+echo "  - $IMAGE_NAME:$VERSION" | tee -a "$LOG_FILE"
+echo "  - $IMAGE_NAME:latest" | tee -a "$LOG_FILE"

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -euo pipefail
+
+#!/bin/bash
 
 echo "Stopping application..."
 

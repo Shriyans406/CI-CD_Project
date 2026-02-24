@@ -2,16 +2,21 @@ FROM debian:12
 
 WORKDIR /app
 
-RUN apt update && apt install -y python3 python3-pip python3-venv
+# Install Python
+RUN apt update && apt install -y python3 python3-pip python3-venv \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create virtual environment
 RUN python3 -m venv /venv
 
-# Activate venv and install Flask
-RUN /venv/bin/pip install flask
+# Install Flask inside venv
+RUN /venv/bin/pip install --no-cache-dir flask
 
-# Copy application
-COPY ../app /app
+# Copy application correctly from root context
+COPY app/ /app/
 
-# Use venv python to run app
+EXPOSE 5000
+
+# Run app using venv Python
 CMD ["/venv/bin/python", "app.py"]
